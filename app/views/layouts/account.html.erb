@@ -9,23 +9,29 @@
     </head>
 
     <body>
-        <header>
-            <nav>
+      <header class = "navbar navbar-fixed-top navbar-inverse">
+	<div class = "container">
+	  <%= link_to "LINE LIKE app","#",id:"logo" %>
+          <nav>
+	    <ul class = "nav navbar-nav navbar-right">
                 <% if user_signed_in? %>
                 <strong><%= link_to current_user.username, account_show_path %></strong>
-                <%= link_to 'プロフィール変更', edit_user_registration_path %>
-                <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+                <li><%= link_to 'プロフィール変更', edit_user_registration_path %></li>
+                <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
             <% else %>
-                <%= link_to 'サインアップ', new_user_registration_path %>
-                <%= link_to 'ログイン', new_user_session_path %>
-		<%= link_to 'Sign in with Twitter', user_twitter_omniauth_authorize_path %>
+                <li><%= link_to 'サインアップ', new_user_registration_path %></li>
+                <li><%= link_to 'ログイン', new_user_session_path %></li>
+		<li><%= link_to 'Sign in with Twitter', user_twitter_omniauth_authorize_path %></li>
                 <% end %>
-            </nav>
-        </header>
+	    </ul>
+          </nav>
+	</div>
+      </header>
 
         <p class="notice"><%= notice %></p>
         <p class="alert"><%= alert %></p>
-
-        <%= yield %>
+	<div class = "container">
+          <%= yield %>
+	</div>
     </body>
 </html>

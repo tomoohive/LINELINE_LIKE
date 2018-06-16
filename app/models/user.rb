@@ -5,6 +5,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :lockable, :timeoutable, :omniauthable, :omniauth_providers => [:twitter]
 
+  has_many :active_relationships, class_name: "Relationship",
+           foreign_key: "followed_id",
+           dependent: :destroy
+
+  has_many :following, through: :active_relationships, source: :followed
+
   def self.from_omniauth(auth)
     find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |user|
       user.provider = auth["provider"]
@@ -22,4 +28,17 @@ class User < ApplicationRecord
       super
     end
   end
+
+  def follow(other_user)
+    active_relationships.create(followed_id: other_user.id)
+  end
+
+  def unfollow(other_user)
+    active_relationships.find_by(followed_id: other_user.id).destroy
+  end
+
+  def following?(other_user)
+    following.include?(other_user)
+  end
+  
 end
