@@ -15,6 +15,13 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
 
+  has_many :from_messages, class_name: "Message",
+           foreign_key: "from_id", dependent: :destroy
+  has_many :to_messages, class_name: "Message",
+           foreign_key: "to_id", dependent: :destroy
+  has_many :sent_messages, through: :from_messages, source: :from
+  has_many :received_messages, through: :to_messages, source: :to
+
   def self.from_omniauth(auth)
     find_or_create_by(provider: auth["provider"], uid: auth["uid"]) do |user|
       user.provider = auth["provider"]
@@ -43,6 +50,10 @@ class User < ApplicationRecord
 
   def following?(other_user)
     following.include?(other_user)
+  end
+
+  def send_message(other_user, room_id, content)
+    from_messages.create!(to_id: other_user.id, room_id: room_id, content: content)
   end
   
 end
