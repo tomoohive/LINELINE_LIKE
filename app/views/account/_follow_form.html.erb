@@ -1,6 +1,7 @@
 <% if user_signed_in? %>
 <% @users.each do |user| %>
-<h3><%= user.username %></h3> 
+<% unless user.username == current_user.username %>
+<h3><%= user.username %></h3>
 <div id="follow_form">
  <% if current_user.following?(user) %>
  <%= form_for(current_user.active_relationships.find_by(followed_id: user.id),
@@ -14,5 +15,6 @@
 <% end %>
  <% end %>
 </div>
+<% end %>
 <% end %>
 <% end %>
