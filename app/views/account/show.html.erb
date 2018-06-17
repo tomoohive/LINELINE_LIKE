@@ -1,21 +1,17 @@
-<h1>Hello! <%= current_user.username %></h1>
-<p>This is User Page.</p>
-
 <div class="row">
   <aside class="col-md-4">
     <section class="user_info">
-      <h1><%= current_user.username %></h1>
+      <h3><%= current_user.username %>'s Friends</h3>
     </section>
     <section class="stats">
       <%= render 'shared/stats' %>
     </section>
   </aside>
   <div class="col-md-8">
-    <h3><%= @title %></h3>
     <% @user.following.each do |user| %>
     <table class="users follow">
       <tr>
-        <td> <%= user.username %> </td>
+        <h3> <%= link_to user.username,user %> </h3>
       </tr>
     </table>
     <% end %>

@@ -10,26 +10,26 @@
 
     <body>
       <header class = "navbar navbar-fixed-top navbar-inverse">
-	<div class = "container">
-	  <%= link_to "LINE LIKE app","show",id:"logo" %>
+        <div class = "container">
+          <%= link_to "LINE LIKE app","show",id:"logo" %>
           <nav>
-	    <ul class = "nav navbar-nav navbar-right">
+            <ul class = "nav navbar-nav navbar-right">
                 <% if user_signed_in? %>
                 <li><%= link_to 'Home', account_show_path %></li>
                 <li><%= link_to 'Search Users', account_search_path %></li>
                 <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
             <% else %>
-		<li><%= link_to 'Sign in with Twitter', user_twitter_omniauth_authorize_path %></li>
+                <li><%= link_to 'Sign in with Twitter', user_twitter_omniauth_authorize_path %></li>
                 <% end %>
-	    </ul>
+            </ul>
           </nav>
-	</div>
+        </div>
       </header>
 
         <p class="notice"><%= notice %></p>
         <p class="alert"><%= alert %></p>
-	<div class = "container">
+        <div class = "container">
           <%= yield %>
-	</div>
+        </div>
     </body>
 </html>

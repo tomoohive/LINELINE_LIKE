@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'account/search'
   get 'static_pages/home'
   get 'static_pages/help'
-  root 'static_pages#home'
+  root 'account#index'
   resources :users do
     member do
       get :following,:followers

@@ -5,7 +5,7 @@ class AccountController < ApplicationController
   end
 
   def show
-    @title = "Following"
+    @title = "List"
     @user = User.find(current_user.id)
     @users = @user.following
   end
