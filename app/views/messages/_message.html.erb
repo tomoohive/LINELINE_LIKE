@@ -5,8 +5,8 @@
   <script type="text/javascript">
     var from_id = <%= message.from_id %>;
     var current_user_id = $('.message').data('session');
-    if(current_user){
-      $('p.' + <%= message.id %>).css('text-align','right');
+    if(from_id == current_user_id){
+      $('p.' + <%= message.id %>).css('text-align','left');
     }else{
       $('p.' + <%= message.id %>).css('text-align','left');
     }
